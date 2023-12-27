@@ -3,6 +3,8 @@
 
   inputs = {
     mars-std.url = "github:mars-research/mars-std";
+    mars-std.inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    mars-std.inputs.rust-overlay.url = "github:oxalica/rust-overlay/ce117f3e0de8262be8cd324ee6357775228687cf";
   };
 
   outputs = { self, mars-std, ... }: let
@@ -10,7 +12,7 @@
     supportedSystems = [ "x86_64-linux" ];
 
     # Rust nightly version.
-    nightlyVersion = "2021-08-01";
+    nightlyVersion = "2023-08-01";
   in mars-std.lib.eachSystem supportedSystems (system: let
     pkgs = mars-std.legacyPackages.${system};
     lib = pkgs.lib;
